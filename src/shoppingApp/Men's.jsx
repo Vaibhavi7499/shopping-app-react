@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Jwellary = () => {
-  let [jwellary, setJwellary] = useState([]);
+const Men = () => {
+  let [men, setMen] = useState([]);
 
-  function getJewellary() {
-    fetch("https://fakestoreapi.com/products/category/jewelery")
+  function getMensData() {
+    fetch("https://fakestoreapi.com/products/category/men's clothing")
       .then((res) => {
         return res.json();
       })
       .then((r) => {
-        setJwellary(r);
+        setMen(r);
       });
   }
 
   useEffect(() => {
-    getJewellary();
+    getMensData();
   }, []);
 
   return (
     <div className="row m-4">
-      {jwellary?.map((e) => (
+      {men?.map((e) => (
         <div
           className="card col-md-3"
           style={{
@@ -42,4 +42,4 @@ const Jwellary = () => {
   );
 };
 
-export default Jwellary;
+export default Men;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Cart from "./shoppingApp/Cart";
 
 const Layout = () => {
   return (
@@ -27,23 +28,29 @@ const Layout = () => {
           </div>
         </div>
       </nav>  */}
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link active" to="/">
-                ShoppingApp
-              </Link>
+              <Link className="nav-link active">ShoppingApp</Link>
             </li>
-            <li className="d-flex">
+            <li className="nav-item">
               <Link className="nav-link active" to="/cart">
-                Cart
+                Cart{Cart.length}
               </Link>
             </li>
           </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </form>
         </div>
       </nav>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary mt-3">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <ul className="navbar-nav">
             <li className="nav-item">
@@ -53,12 +60,22 @@ const Layout = () => {
             </li>
             <li className="d-flex">
               <Link className="nav-link active" to="/electronics">
-              Electronics
+                Electronics
               </Link>
             </li>
             <li className="d-flex">
               <Link className="nav-link active" to="/jwellary">
-              Jwellary
+                Jwellary
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/mens">
+                Men's Clothing
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/womens">
+                Women's Clothing
               </Link>
             </li>
           </ul>
