@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 const ViewProduct = () => {
   let params = useParams();
 
-  let [viewProduct, setViewProduct] = useState([]);
+  let [viewProduct, setViewProduct] = useState({});
 
   function getProductById() {
     fetch(`https://fakestoreapi.com/products/${params.id}`)
@@ -19,28 +19,30 @@ const ViewProduct = () => {
       });
   }
 
-  console.log(viewProduct);
-
   useEffect(() => {
     getProductById();
   }, []);
 
   return (
-    <div className="row m-4">
+    <div className="row d-flex justify-content-around">
       <div
-        className="card col-md-3"
+        className="card col-md-6 m-3"
         style={{
-          width: 300,
-          marginBottom: "40px",
-          padding: "20px",
-          marginLeft: "3px",
+          marginBottom: "10px",
         }}
       >
-        <img src={viewProduct?.image} className="card-img-top" alt="..." />
+        <div className="text-center h-100">
+          <img
+            src={viewProduct?.image}
+            className="pt-2 card-img-top"
+            alt="..."
+            style={{ width: "100px", height: "130px" }}
+          />
+        </div>
         <div className="card-body">
-          <h5 className="card-title">{viewProduct?.title}</h5>
-          <p>{viewProduct?.description}</p>
-          <h5 className="card-te4t">${viewProduct?.price}</h5>
+          <a className="cart-title">{viewProduct?.title}</a>
+          <p className="card-title pt-2">{viewProduct?.description}</p>
+          <h5 className="card-title">${viewProduct?.price}</h5>
         </div>
       </div>
     </div>

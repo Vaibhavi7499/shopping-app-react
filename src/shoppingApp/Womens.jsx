@@ -19,26 +19,34 @@ const Womens = () => {
   }, []);
 
   return (
-    <div className="row m-4">
-      {women?.map((e) => (
-        <div
-          className="card col-md-3"
-          style={{
-            width: 300,
-            marginBottom: "40px",
-            padding: "20px",
-            marginLeft: "3px",
-          }}
-        >
-          <img src={e?.image} className="card-img-top" alt="..." />
-          <div className="card-body">
-            <Link className="cart-title">{e?.title}</Link>
-            <h5 className="card-te4t">${e?.price}</h5>
-            <Link className="btn btn-primary">Add to Cart</Link>
-          </div>
+    <div className="row d-flex justify-content-around">
+    {women?.map((e) => (
+      <div
+        key={e?.id}
+        className="card col-md-4 m-3"
+        style={{
+          width: "18rem",
+          marginBottom: "10px",
+        }}
+      >
+        <div className="text-center h-100">
+          <img
+            src={e?.image}
+            className="pt-2 card-img-top"
+            alt="..."
+            style={{ width: "100px", height: "130px" }}
+          />
         </div>
-      ))}
-    </div>
+        <div className="card-body">
+          <Link className="cart-title" to={`/view/${e?.id}`}>
+            {e?.title}
+          </Link>
+          <h5 className="card-title">${e?.price}</h5>
+          <Link className="btn btn-primary">Add to Cart</Link>
+        </div>
+      </div>
+    ))}
+  </div>
   );
 };
 

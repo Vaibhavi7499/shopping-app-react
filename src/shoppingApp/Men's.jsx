@@ -19,21 +19,29 @@ const Men = () => {
   }, []);
 
   return (
-    <div className="row m-4">
+    <div className="row d-flex justify-content-around">
       {men?.map((e) => (
         <div
-          className="card col-md-3"
+          key={e?.id}
+          className="card col-md-4 m-3"
           style={{
-            width: 300,
-            marginBottom: "40px",
-            padding: "20px",
-            marginLeft: "3px",
+            width: "18rem",
+            marginBottom: "10px",
           }}
         >
-          <img src={e?.image} className="card-img-top" alt="..." />
+          <div className="text-center h-100">
+            <img
+              src={e?.image}
+              className="pt-2 card-img-top"
+              alt="..."
+              style={{ width: "100px", height: "130px" }}
+            />
+          </div>
           <div className="card-body">
-            <Link className="cart-title">{e?.title}</Link>
-            <h5 className="card-te4t">${e?.price}</h5>
+            <Link className="cart-title" to={`/view/${e?.id}`}>
+              {e?.title}
+            </Link>
+            <h5 className="card-title">${e?.price}</h5>
             <Link className="btn btn-primary">Add to Cart</Link>
           </div>
         </div>
