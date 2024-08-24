@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import BsicDetails from "./form/BsicDetails";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import AdditionalQuestion from "./form/AdditionalQuestion";
@@ -13,6 +13,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Womens from "./shoppingApp/Womens";
 // import ViewProduct from "./shoppingApp/ViewProduct";
 // import FilterTab from "./shoppingApp/FilterTab";
+import { cartContext } from "./context/CartContext";
+import axios from "axios";
 
 let AdditionalQuestion = React.lazy(() => import("./form/AdditionalQuestion"));
 let EnteredDetails = React.lazy(() => import("./form/EnteredDetails"));
@@ -27,29 +29,76 @@ let ViewProduct = React.lazy(() => import("./shoppingApp/ViewProduct"));
 let FilterTab = React.lazy(() => import("./shoppingApp/FilterTab"));
 
 function App() {
+  let [cartCount, setCartCount] = useState([]);
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  function addToCart(obj) {
+    axios({
+      method: "POST",
+      url: "http://localhost:8000/cart",
+      data: obj,
+    })
+      .then((r) => {
+        console.log(r, "add to cart");
+        getCart();
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }
+
+  function getCart() {
+    axios
+      .get("http://localhost:8000/cart")
+      .then((r) => {
+        setCartCount(r.data);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }
+
+  function removeFromCart(id) {
+    axios({
+      method: "DELETE",
+      url: `http://localhost:8000/cart/${id}`,
+    })
+      .then((r) => {
+        getCart();
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <FilterTab />
-        <Suspense fallback={<div>Loading.....</div>}>
-          <Routes>
-            {/* <Route path='/' element={<BsicDetails/>}/> */}
-            <Route
-              path="/additionalquestion"
-              element={<AdditionalQuestion />}
-            />
-            <Route path="/entereddetails" element={<EnteredDetails />} />
-            <Route path="/response" element={<Response />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/" element={<All />} />
-            <Route path="/electronics" element={<Electronics />} />
-            <Route path="/jwellary" element={<Jwellary />} />
-            <Route path="/mens" element={<Men />} />
-            <Route path="/womens" element={<Womens />} />
-            <Route path="/view/:id" element={<ViewProduct />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+      <cartContext.Provider value={{ addToCart, cartCount, removeFromCart }}>
+        <BrowserRouter>
+          <FilterTab />
+          <Suspense fallback={<div>Loading.....</div>}>
+            <Routes>
+              {/* <Route path='/' element={<BsicDetails/>}/> */}
+              <Route
+                path="/additionalquestion"
+                element={<AdditionalQuestion />}
+              />
+              <Route path="/entereddetails" element={<EnteredDetails />} />
+              <Route path="/response" element={<Response />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/" element={<All />} />
+              <Route path="/electronics" element={<Electronics />} />
+              <Route path="/jwellary" element={<Jwellary />} />
+              <Route path="/mens" element={<Men />} />
+              <Route path="/womens" element={<Womens />} />
+              <Route path="/view/:id" element={<ViewProduct />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </cartContext.Provider>
     </div>
   );
 }

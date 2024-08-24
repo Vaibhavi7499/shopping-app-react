@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { cartContext } from "../context/CartContext";
 
 const Jwellary = () => {
+  let {addToCart} = useContext(cartContext);
   let [jwellary, setJwellary] = useState([]);
 
   function getJewellary() {
@@ -42,7 +44,7 @@ const Jwellary = () => {
               {e?.title}
             </Link>
             <h5 className="card-title">${e?.price}</h5>
-            <Link className="btn btn-primary">Add to Cart</Link>
+            <Link className="btn btn-primary" onClick={()=>addToCart(e)}>Add to Cart</Link>
           </div>
         </div>
       ))}

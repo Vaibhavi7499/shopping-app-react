@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { cartContext } from "../context/CartContext";
 
 const FilterTab = () => {
+let {cartCount} = useContext(cartContext);
+
   let mySelf = {
     display: "block",
     padding: "10px 15px",
@@ -124,7 +127,13 @@ const FilterTab = () => {
                 padding: "5px 7px",
               }}
             >
-              <h5>cart</h5>
+              <h5 className="position-relative">
+                cart
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                  {cartCount?.length}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </h5>
             </Link>
           </li>
         </div>

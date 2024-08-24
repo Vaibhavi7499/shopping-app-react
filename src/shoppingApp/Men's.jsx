@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { cartContext } from "../context/CartContext";
 
 const Men = () => {
+  let { addToCart } = useContext(cartContext);
   let [men, setMen] = useState([]);
 
   function getMensData() {
@@ -42,7 +44,9 @@ const Men = () => {
               {e?.title}
             </Link>
             <h5 className="card-title">${e?.price}</h5>
-            <Link className="btn btn-primary">Add to Cart</Link>
+            <Link className="btn btn-primary" onClick={() => addToCart(e)}>
+              Add to Cart
+            </Link>
           </div>
         </div>
       ))}

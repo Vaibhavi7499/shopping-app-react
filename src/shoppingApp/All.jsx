@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Cart from "./Cart";
+import { cartContext } from "../context/CartContext";
 
 const All = () => {
+  let { addToCart } = useContext(cartContext);
   let [product, setProduct] = useState([]);
-
-  let [cart, setCart] = useState([]);
 
   function all() {
     fetch("https://fakestoreapi.com/products")
@@ -45,7 +44,9 @@ const All = () => {
               {e?.title}
             </Link>
             <h5 className="card-title">${e?.price}</h5>
-            <Link className="btn btn-primary">Add to Cart</Link>
+            <Link className="btn btn-primary" onClick={() => addToCart(e)}>
+              Add to Cart
+            </Link>
           </div>
         </div>
       ))}
