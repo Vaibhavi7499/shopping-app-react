@@ -15,6 +15,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import FilterTab from "./shoppingApp/FilterTab";
 import { cartContext } from "./context/CartContext";
 import axios from "axios";
+import HandleForm from "./FormHandle/HandleForm";
 
 let AdditionalQuestion = React.lazy(() => import("./form/AdditionalQuestion"));
 let EnteredDetails = React.lazy(() => import("./form/EnteredDetails"));
@@ -31,9 +32,9 @@ let FilterTab = React.lazy(() => import("./shoppingApp/FilterTab"));
 function App() {
   let [cartCount, setCartCount] = useState([]);
 
-  useEffect(() => {
-    getCart();
-  }, []);
+  // useEffect(() => {
+  //   getCart();
+  // }, []);
 
   function addToCart(obj) {
     axios({
@@ -76,12 +77,12 @@ function App() {
 
   return (
     <div className="App">
-      <cartContext.Provider value={{ addToCart, cartCount, removeFromCart }}>
+      {/* <cartContext.Provider value={{ addToCart, cartCount, removeFromCart }}>
         <BrowserRouter>
           <FilterTab />
           <Suspense fallback={<div>Loading.....</div>}>
             <Routes>
-              {/* <Route path='/' element={<BsicDetails/>}/> */}
+               <Route path='/' element={<BsicDetails/>}/> 
               <Route
                 path="/additionalquestion"
                 element={<AdditionalQuestion />}
@@ -98,7 +99,8 @@ function App() {
             </Routes>
           </Suspense>
         </BrowserRouter>
-      </cartContext.Provider>
+      </cartContext.Provider> */}
+      <HandleForm/>
     </div>
   );
 }
