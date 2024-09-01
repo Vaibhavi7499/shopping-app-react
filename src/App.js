@@ -16,6 +16,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { cartContext } from "./context/CartContext";
 import axios from "axios";
 import HandleForm from "./FormHandle/HandleForm";
+import Loading from "./Loading/Loading";
 
 let AdditionalQuestion = React.lazy(() => import("./form/AdditionalQuestion"));
 let EnteredDetails = React.lazy(() => import("./form/EnteredDetails"));
@@ -31,34 +32,41 @@ let FilterTab = React.lazy(() => import("./shoppingApp/FilterTab"));
 
 function App() {
   let [cartCount, setCartCount] = useState([]);
+  let [loading, setLoading] = useState(false)
 
-  // useEffect(() => {
-  //   getCart();
-  // }, []);
+  useEffect(() => {
+    getCart();
+  }, []);
 
   function addToCart(obj) {
+    setLoading(true)
     axios({
       method: "POST",
       url: "http://localhost:8000/cart",
       data: obj,
     })
       .then((r) => {
+      setLoading(false)
         console.log(r, "add to cart");
         getCart();
       })
       .catch((err) => {
         console.warn(err);
+      setLoading(false)
       });
   }
 
   function getCart() {
+    setLoading(true)
     axios
       .get("http://localhost:8000/cart")
       .then((r) => {
         setCartCount(r.data);
+      setLoading(false)
       })
       .catch((err) => {
         console.warn(err);
+      setLoading(false)
       });
   }
 
@@ -77,12 +85,12 @@ function App() {
 
   return (
     <div className="App">
-      {/* <cartContext.Provider value={{ addToCart, cartCount, removeFromCart }}>
+      <cartContext.Provider value={{ addToCart, cartCount, removeFromCart }}>
         <BrowserRouter>
           <FilterTab />
-          <Suspense fallback={<div>Loading.....</div>}>
+          <Suspense fallback={<div>Loading..</div>}>
             <Routes>
-               <Route path='/' element={<BsicDetails/>}/> 
+               {/* <Route path='/' element={<BsicDetails/>}/>  */}
               <Route
                 path="/additionalquestion"
                 element={<AdditionalQuestion />}
@@ -99,8 +107,8 @@ function App() {
             </Routes>
           </Suspense>
         </BrowserRouter>
-      </cartContext.Provider> */}
-      <HandleForm/>
+      </cartContext.Provider>
+      {/* <HandleForm/> */}
     </div>
   );
 }

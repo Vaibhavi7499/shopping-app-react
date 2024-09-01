@@ -8,9 +8,6 @@ const EmptyCart = () => {
       <div className="row">
         <div className="col-md-12">
           <div className="card">
-            <div className="card-header">
-              <h5>Cart</h5>
-            </div>
             <div className="card-body cart">
               <div className="col-sm-12 empty-cart-cls text-center">
                 <img

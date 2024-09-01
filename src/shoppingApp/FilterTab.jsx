@@ -33,7 +33,7 @@ let {cartCount} = useContext(cartContext);
 
   return (
     <div style={obj}>
-      <ul class="nav nav-pills">
+      <ul className="nav nav-pills">
         <li className="mt-2" style={heading}>
           <h5>Shopping App</h5>
         </li>
@@ -131,7 +131,7 @@ let {cartCount} = useContext(cartContext);
                 cart
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                   {cartCount?.length}
-                  <span class="visually-hidden">unread messages</span>
+                  <span className="visually-hidden">unread messages</span>
                 </span>
               </h5>
             </Link>
