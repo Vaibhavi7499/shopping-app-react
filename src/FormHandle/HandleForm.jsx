@@ -56,8 +56,7 @@ const HandleForm = () => {
                 message: "email is required",
               },
               pattern: {
-                value:
-                  /[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/,
+                value:/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/,
                 message: "Invalid email format",
               },
             })}

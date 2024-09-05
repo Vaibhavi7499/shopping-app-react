@@ -3,6 +3,8 @@ import "./EmptyCart.css";
 import { Link } from "react-router-dom";
 
 const EmptyCart = () => {
+
+
   return (
     <div className="container-fluid  mt-100">
       <div className="row">

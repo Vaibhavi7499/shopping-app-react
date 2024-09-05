@@ -17,6 +17,8 @@ import { cartContext } from "./context/CartContext";
 import axios from "axios";
 import HandleForm from "./FormHandle/HandleForm";
 import Loading from "./Loading/Loading";
+import Todo from "./Todo/Todo";
+import CollegeForm from "./FormHandle/CollegeForm";
 
 let AdditionalQuestion = React.lazy(() => import("./form/AdditionalQuestion"));
 let EnteredDetails = React.lazy(() => import("./form/EnteredDetails"));
@@ -85,12 +87,12 @@ function App() {
 
   return (
     <div className="App">
-      <cartContext.Provider value={{ addToCart, cartCount, removeFromCart }}>
+      {/* <cartContext.Provider value={{ addToCart, cartCount, removeFromCart }}>
         <BrowserRouter>
           <FilterTab />
           <Suspense fallback={<div>Loading..</div>}>
             <Routes>
-               {/* <Route path='/' element={<BsicDetails/>}/>  */}
+              <Route path='/' element={<BsicDetails/>}/> 
               <Route
                 path="/additionalquestion"
                 element={<AdditionalQuestion />}
@@ -107,8 +109,10 @@ function App() {
             </Routes>
           </Suspense>
         </BrowserRouter>
-      </cartContext.Provider>
+      </cartContext.Provider> */}
       {/* <HandleForm/> */}
+      {/* <Todo/> */}
+      <CollegeForm/>
     </div>
   );
 }
