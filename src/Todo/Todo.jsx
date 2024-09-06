@@ -1,32 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { storeContext } from "../context/StoreContext";
 
 const Todo = () => {
-  let [inptValue, setInptValue] = useState("");
-  let [todo, setTodo] = useState([]);
+  let {
+    inptValue,
+    todo,
+    getInptValue,
+    addTodo,
+    deleteTodo,
+    updateItem,
+  } = useContext(storeContext);
 
-  function getInptValue(e){
-setInptValue(e.target.value)
-  }
-
-  let addTodo = () => {
-    setTodo([...todo, { name: inptValue }]);
-    setInptValue("")
-  };
-
-
-  let deleteTodo=(name)=>{
-let a = todo.filter((e)=>{
-return e?.name !== name
-})
-
-setTodo(a);
-  }
-
-  function updateItem(obj){
-setInptValue(obj?.name)
-console.log(obj)
-  }
-  console.log(inptValue)
 
   return (
     <div className="col-md-4 m-auto">
@@ -36,7 +20,7 @@ console.log(obj)
         className="form-control"
         type="text"
         value={inptValue}
-        onChange={(e) =>getInptValue(e)}
+        onChange={(e) => getInptValue(e)}
       />
       <button className="btn btn-primary mt-4" onClick={addTodo}>
         Add Todo
@@ -44,7 +28,18 @@ console.log(obj)
       <hr></hr>
       <ul>
         {todo.map((e) => (
-          <li>{e?.name}{" "}&nbsp;&nbsp;&nbsp;&nbsp;<button className="btn btn-success" onClick={()=>updateItem(e)}>Update</button>{" "}<button className="btn btn-danger" onClick={()=>deleteTodo(e?.name)}>Delete</button></li>
+          <li>
+            {e?.name} &nbsp;&nbsp;&nbsp;&nbsp;
+            <button className="btn btn-success" onClick={() => updateItem(e)}>
+              Update
+            </button>{" "}
+            <button
+              className="btn btn-danger"
+              onClick={() => deleteTodo(e?.name)}
+            >
+              Delete
+            </button>
+          </li>
         ))}
       </ul>
     </div>
