@@ -35,6 +35,7 @@ console.log(obj)
       <input
         className="form-control"
         type="text"
+        value={inptValue}
         onChange={(e) =>getInptValue(e)}
       />
       <button className="btn btn-primary mt-4" onClick={addTodo}>

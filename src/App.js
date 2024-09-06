@@ -1,5 +1,11 @@
 import "./App.css";
-import React, { Suspense, useEffect, useState } from "react";
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import BsicDetails from "./form/BsicDetails";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import AdditionalQuestion from "./form/AdditionalQuestion";
@@ -19,6 +25,7 @@ import HandleForm from "./FormHandle/HandleForm";
 import Loading from "./Loading/Loading";
 import Todo from "./Todo/Todo";
 import CollegeForm from "./FormHandle/CollegeForm";
+import Child from "./Child";
 
 let AdditionalQuestion = React.lazy(() => import("./form/AdditionalQuestion"));
 let EnteredDetails = React.lazy(() => import("./form/EnteredDetails"));
@@ -34,41 +41,60 @@ let FilterTab = React.lazy(() => import("./shoppingApp/FilterTab"));
 
 function App() {
   let [cartCount, setCartCount] = useState([]);
-  let [loading, setLoading] = useState(false)
+  let [loading, setLoading] = useState(false);
+  let [count, setCount] = useState(0);
+  let [name, setName] = useState("kishor");
+  let [id, setId] = useState(0);
 
-  useEffect(() => {
-    getCart();
-  }, []);
+  let getId = useCallback(() => {
+    return setId(id + 1);
+  }, [id, name]);
+
+  // const expensiveCalculation = (num) => {
+  //   console.log("Calculating...");
+  //   for (let i = 0; i < 1000000000; i++) {
+  //     num += 1;
+  //   }
+  //   return num;
+  // };
+
+  // let calculation = useMemo(()=>{
+  //  return expensiveCalculation(count)
+  // },[count])
+
+  // useEffect(() => {
+  //   getCart();
+  // }, []);
 
   function addToCart(obj) {
-    setLoading(true)
+    setLoading(true);
     axios({
       method: "POST",
       url: "http://localhost:8000/cart",
       data: obj,
     })
       .then((r) => {
-      setLoading(false)
+        setLoading(false);
         console.log(r, "add to cart");
         getCart();
       })
       .catch((err) => {
         console.warn(err);
-      setLoading(false)
+        setLoading(false);
       });
   }
 
   function getCart() {
-    setLoading(true)
+    setLoading(true);
     axios
       .get("http://localhost:8000/cart")
       .then((r) => {
         setCartCount(r.data);
-      setLoading(false)
+        setLoading(false);
       })
       .catch((err) => {
         console.warn(err);
-      setLoading(false)
+        setLoading(false);
       });
   }
 
@@ -112,7 +138,15 @@ function App() {
       </cartContext.Provider> */}
       {/* <HandleForm/> */}
       {/* <Todo/> */}
-      <CollegeForm/>
+      {/* <CollegeForm/> */}
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>click</button>
+      <hr></hr>
+      {/* <h2 >{calculation}</h2> */}
+      <hr />
+      <button onClick={() => setName("vaibhavi")}>changeName</button>
+      <h2>id is {id}</h2>
+      <Child name={name} getId={getId} />
     </div>
   );
 }
