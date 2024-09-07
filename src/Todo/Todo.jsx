@@ -28,14 +28,14 @@ const Todo = () => {
       <hr></hr>
       <ul>
         {todo.map((e) => (
-          <li>
+          <li key={e?.id}>
             {e?.name} &nbsp;&nbsp;&nbsp;&nbsp;
             <button className="btn btn-success" onClick={() => updateItem(e)}>
               Update
             </button>{" "}
             <button
               className="btn btn-danger"
-              onClick={() => deleteTodo(e?.name)}
+              onClick={() => deleteTodo(e?.id)}
             >
               Delete
             </button>
