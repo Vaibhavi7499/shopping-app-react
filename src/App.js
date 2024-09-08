@@ -137,16 +137,16 @@ function App() {
         </BrowserRouter>
       </cartContext.Provider> */}
       {/* <HandleForm/> */}
-      <Todo/>
-      {/* <CollegeForm/> */}
-     { /*<h1>{count}</h1>*/}
-      {/*<button onClick={() => setCount(count + 1)}>click</button>*/}
-      {/* <hr></hr> */}
-      {/* <h2 >{calculation}</h2> */}
-      {/* <hr /> */}
-      {/* <button onClick={() => setName("vaibhavi")}>changeName</button> */}
-      {/* <h2>id is {id}</h2> */}
-      {/* <Child name={name} getId={getId} /> */}
+      {/* <Todo/> */}
+      {/* <CollegeForm/>  */}
+     <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>click</button>
+       <hr></hr> 
+      {/* <h2 >{calculation}</h2>  */}
+      <hr /> 
+      <button onClick={() => setName("vaibhavi")}>changeName</button>
+       <h2>id is {id}</h2> 
+    <Child name={name} getId={getId}/>
     </div>
   );
 }

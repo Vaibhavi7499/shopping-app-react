@@ -5,7 +5,7 @@ const Child = (props) => {
 
   return (
     <div>
-      <hr />
+      <hr/>
       <h1>{props?.name}</h1>
       <button onClick={() => props.getId()}>setId</button>
     </div>
