@@ -26,6 +26,7 @@ import Loading from "./Loading/Loading";
 import Todo from "./Todo/Todo";
 import CollegeForm from "./FormHandle/CollegeForm";
 import Child from "./Child";
+import TodoRedux from "./TodoRedux/TodoRedux";
 
 let AdditionalQuestion = React.lazy(() => import("./form/AdditionalQuestion"));
 let EnteredDetails = React.lazy(() => import("./form/EnteredDetails"));
@@ -139,14 +140,15 @@ function App() {
       {/* <HandleForm/> */}
       {/* <Todo/> */}
       {/* <CollegeForm/>  */}
-     <h1>{count}</h1>
-      <button onClick={() => setCount(count + 1)}>click</button>
-       <hr></hr> 
+      {/* <h1>{count}</h1> */}
+      {/* <button onClick={() => setCount(count + 1)}>click</button> */}
+      {/* <hr></hr> */}
       {/* <h2 >{calculation}</h2>  */}
-      <hr /> 
-      <button onClick={() => setName("vaibhavi")}>changeName</button>
-       <h2>id is {id}</h2> 
-    <Child name={name} getId={getId}/>
+      {/* <hr /> */}
+      {/* <button onClick={() => setName("vaibhavi")}>changeName</button> */}
+      {/* <h2>id is {id}</h2> */}
+      {/* <Child name={name} getId={getId} /> */}
+      <TodoRedux/>
     </div>
   );
 }
